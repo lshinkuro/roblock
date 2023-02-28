@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RxSwift
 
 class ListMoviePresenter {
     
@@ -14,6 +15,11 @@ class ListMoviePresenter {
     
     init(interactor: ListMovieInteractor) {
         self.interactor = interactor
+    }
+    
+    func getMovie(language:String, page:Int) -> PublishSubject<MoviePopular> {
+        interactor.getMovie(language: language, page: page)
+        return interactor.dataMovie
     }
     
 }

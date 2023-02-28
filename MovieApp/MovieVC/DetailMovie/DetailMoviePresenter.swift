@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RxSwift
 
 class DetailMoviePresenter {
     
@@ -15,5 +16,11 @@ class DetailMoviePresenter {
     init(interactor: DetailMovieInteractor) {
         self.interactor = interactor
     }
+    
+    func getDetailMovie(id: String) -> PublishSubject<DetailMovieModel> {
+        interactor.getDetailMovie(id: id)
+        return interactor.detail
+    }
+    
     
 }

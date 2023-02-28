@@ -8,8 +8,15 @@
 import UIKit
 
 class GenreTableViewCell: UITableViewCell {
-
+    @IBOutlet weak var title: UILabel!
+    
+    static let identifier = String(describing: GenreTableViewCell.self)
+    static let nib = {
+        return UINib(nibName: identifier, bundle: nil)
+    }()
+    
     override func awakeFromNib() {
+        
         super.awakeFromNib()
         // Initialization code
     }

@@ -6,10 +6,20 @@
 //
 
 import Foundation
+import RxSwift
 
-class DetailMovieInteractor {
+class DetailMovieInteractor: BaseInteractor {
+    let detail = PublishSubject<DetailMovieModel>()
     
-    func fetchData() {
-        
+    func getDetailMovie(id: String) {
+        api.getApi(endpoint:.detailMovie(id))
+            .subscribe { [weak self] (data: DetailMovieModel) in
+                guard self != nil else {return}
+                self?.detail.onNext(data)
+            } onError: { error in
+                guard self != nil else {return}
+                self.detail.onError(error)
+            }.disposed(by: bag)
+
     }
 }

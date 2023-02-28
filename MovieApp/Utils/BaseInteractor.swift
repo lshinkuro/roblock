@@ -6,3 +6,9 @@
 //
 
 import Foundation
+import RxSwift
+
+class BaseInteractor {
+    var api = ApiManage()
+    var bag = DisposeBag()
+}

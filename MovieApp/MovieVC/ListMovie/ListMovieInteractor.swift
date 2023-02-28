@@ -6,10 +6,19 @@
 //
 
 import Foundation
+import RxSwift
 
-class ListMovieInteractor {
+class ListMovieInteractor: BaseInteractor {
+    let dataMovie = PublishSubject<MoviePopular>()
     
-    func fetchData() {
-        
+    func getMovie(language:String, page:Int){
+        api.getApi(endpoint: .getMoviePopular(language, page))
+            .subscribe { [weak self] (data: MoviePopular) in
+                guard self != nil else { return }
+                self?.dataMovie.onNext(data)
+            } onError: { [weak self] error in
+                guard self != nil else { return }
+                self?.dataMovie.onError(error)
+            }.disposed(by: bag)
     }
 }
